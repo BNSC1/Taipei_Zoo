@@ -1,13 +1,14 @@
 package com.bn.taipeizoo.data.response
 
 import com.bn.taipeizoo.data.model.TaipeiZooArea
+import com.google.gson.annotations.SerializedName
 
 data class TaipeiZooAreasResponse(
-    val results: TaipeiZooAreasResult
+    val result: TaipeiZooAreasResult
 )
 
 data class TaipeiZooAreasResult(
-    val results: List<TaipeiZooArea>
+    @SerializedName("results") val areas: List<TaipeiZooArea>
 )
 
 /*
