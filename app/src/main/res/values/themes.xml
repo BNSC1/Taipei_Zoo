@@ -14,8 +14,13 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="text_category_title">
+        <item name="android:textSize">@dimen/size_category_title_text</item>
+        <item name="android:textColor">?attr/colorOnSecondary</item>
+    </style>
+
     <style name="text_item_title">
-        <item name="android:textSize">@dimen/size_title_text</item>
+        <item name="android:textSize">@dimen/size_item_title_text</item>
         <item name="android:textColor">?attr/colorOnSecondary</item>
     </style>
 
