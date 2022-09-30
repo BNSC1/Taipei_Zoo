@@ -1,7 +1,10 @@
 package com.bn.taipeizoo.data.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class TaipeiZooArea(
     @SerializedName("e_category") val category: String,
     @SerializedName("e_name") val name: String,
@@ -9,7 +12,7 @@ data class TaipeiZooArea(
     @SerializedName("e_info") val info: String,
     @SerializedName("e_memo") val memo: String,
     @SerializedName("e_url") val url: String,
-)
+) : Parcelable
 
 
 /*

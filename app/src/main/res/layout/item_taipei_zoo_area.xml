@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/padding_list_item">
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="@dimen/size_list_item_image"
+        android:layout_height="@dimen/size_list_item_image"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription"
+        tools:src="@mipmap/ic_launcher_round" />
+
+    <TextView
+        android:id="@+id/title_text"
+        style="@style/text_item_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_list_item"
+        app:layout_constraintStart_toEndOf="@+id/image"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Title" />
+
+    <TextView
+        android:id="@+id/info_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_list_item"
+        android:layout_marginEnd="@dimen/margin_list_item"
+        android:maxLines="2"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toStartOf="@+id/arrow_image"
+        app:layout_constraintStart_toStartOf="@+id/title_text"
+        app:layout_constraintTop_toBottomOf="@+id/title_text"
+        tools:text="資訊資訊資訊資訊資訊資訊資訊資訊資訊資訊資訊資訊" />
+
+    <TextView
+        android:id="@+id/memo_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_list_item"
+        android:layout_marginEnd="@dimen/margin_list_item"
+        android:maxLines="2"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintEnd_toStartOf="@+id/arrow_image"
+        app:layout_constraintStart_toStartOf="@+id/title_text"
+        app:layout_constraintTop_toBottomOf="@+id/info_text"
+        tools:text="Memo Memo Memo Memo Memo Memo Memo Memo Memo Memo" />
+
+    <ImageView
+        android:id="@+id/arrow_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_small_arrow_right"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

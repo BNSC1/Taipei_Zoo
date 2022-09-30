@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="size_list_item_image">96dp</dimen>
+    <dimen name="padding_list_item">8dp</dimen>
+    <dimen name="margin_list_item">8dp</dimen>
+
+    <dimen name="size_title_text">18sp</dimen>
+</resources>

@@ -1,7 +1,10 @@
 package com.bn.taipeizoo.data.model
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class TaipeiZooAnimal(
     @SerializedName("a_name_ch") val chineseName: String,
     @SerializedName("a_name_en") val englishName: String,
@@ -14,7 +17,7 @@ data class TaipeiZooAnimal(
     @SerializedName("a_pic02_url") val pic2Url: String,
     @SerializedName("a_pic03_url") val pic3Url: String,
     @SerializedName("a_pic04_url") val pic4Url: String,
-)
+) : Parcelable
 
 /*
 {

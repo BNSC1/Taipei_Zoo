@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/taipeiZooAreasFragment">
+
+    <fragment
+        android:id="@+id/taipeiZooAreasFragment"
+        android:name="com.bn.taipeizoo.ui.TaipeiZooAreasFragment"
+        android:label="@string/title_taipei_zoo"
+        tools:layout="@layout/fragment_taipei_zoo_areas" >
+        <action
+            android:id="@+id/action_to_taipeiZooAreaDetailFragment"
+            app:destination="@id/taipeiZooAreaDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/taipeiZooAreaDetailFragment"
+        android:name="com.bn.taipeizoo.ui.TaipeiZooAreaDetailFragment"
+        tools:layout="@layout/fragment_taipei_zoo_area_detail">
+        <argument
+            android:name="area"
+            app:argType="com.bn.taipeizoo.data.model.TaipeiZooArea"
+            app:nullable="false"/>
+        <action
+            android:id="@+id/action_to_taipeiZooAnimalDetailFragment"
+            app:destination="@id/taipeiZooAnimalDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/taipeiZooAnimalDetailFragment"
+        android:name="com.bn.taipeizoo.ui.TaipeiZooAnimalDetailFragment"
+        tools:layout="@layout/fragment_taipei_zoo_animal_detail" >
+        <argument
+            android:name="animal"
+            app:argType="com.bn.taipeizoo.data.model.TaipeiZooAnimal"
+            app:nullable="false"/>
+    </fragment>
+</navigation>
