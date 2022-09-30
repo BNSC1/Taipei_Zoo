@@ -42,7 +42,11 @@ class TaipeiZooAreaListAdapter(
     ) : ViewHolder(binding.root) {
         fun bind(item: TaipeiZooArea) {
             with(binding) {
-                Glide.with(root).load(item.picUrl).centerCrop().into(image)
+                item.picUrl.let { url ->
+                    if (url.isNotEmpty()) {
+                        Glide.with(root).load(url).centerCrop().into(image)
+                    }
+                }
                 titleText.text = item.name
                 infoText.text = item.info
                 memoText.text = item.memo

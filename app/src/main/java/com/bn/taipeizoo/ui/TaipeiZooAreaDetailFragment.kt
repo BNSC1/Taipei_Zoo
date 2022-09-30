@@ -1,20 +1,94 @@
 package com.bn.taipeizoo.ui
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.bn.taipeizoo.R
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import com.bn.taipeizoo.data.model.TaipeiZooAnimal
+import com.bn.taipeizoo.data.model.TaipeiZooArea
+import com.bn.taipeizoo.databinding.FragmentTaipeiZooAreaDetailBinding
+import com.bumptech.glide.Glide
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class TaipeiZooAreaDetailFragment : Fragment() {
+    private val viewModel: TaipeiZooViewModel by activityViewModels()
+    private val args by navArgs<TaipeiZooAreaDetailFragmentArgs>()
+    private lateinit var selectedArea: TaipeiZooArea
+
+    private lateinit var listAdapter: TaipeiZooAnimalListAdapter
+    private var _binding: FragmentTaipeiZooAreaDetailBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_taipei_zoo_area_detail, container, false)
+    ): View {
+        _binding = FragmentTaipeiZooAreaDetailBinding.inflate(inflater, container, false)
+        selectedArea = args.area
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        with(binding) {
+            setupAreaDetail()
+            setupAnimalList()
+        }
+    }
+
+    private fun FragmentTaipeiZooAreaDetailBinding.setupAreaDetail() {
+        selectedArea.picUrl.let { url ->
+            if (url.isNotEmpty()) {
+                Glide.with(this@TaipeiZooAreaDetailFragment).load(url).into(areaImage)
+            }
+        }
+        infoText.text = selectedArea.info
+        categoryText.text = selectedArea.category
+        selectedArea.url.let { url ->
+            if (url.isNotEmpty()) {
+                openInBrowserBtn.setOnClickListener {
+                    openInBrowser(url)
+                }
+            } else {
+                openInBrowserBtn.visibility = View.GONE
+            }
+        }
+    }
+
+    private fun openInBrowser(url: String) {
+        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+    }
+
+    private fun FragmentTaipeiZooAreaDetailBinding.setupAnimalList() {
+        with(animalList) {
+            listAdapter = TaipeiZooAnimalListAdapter {
+                goToAnimalDetail(it)
+            }
+            adapter = listAdapter
+            updateListAnimals(getAreaAnimals(selectedArea.name))
+        }
+    }
+
+    private fun goToAnimalDetail(animal: TaipeiZooAnimal) {
+        findNavController().navigate(
+            TaipeiZooAreaDetailFragmentDirections.actionToTaipeiZooAnimalDetailFragment(
+                animal
+            )
+        )
+    }
+
+    private fun getAreaAnimals(areaName: String) = viewModel.getAreaAnimals(areaName)
+
+    private fun updateListAnimals(items: List<TaipeiZooAnimal>) {
+        listAdapter.updateList(items)
     }
 
 }
