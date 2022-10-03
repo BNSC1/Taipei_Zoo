@@ -19,5 +19,5 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navHostFragment.navController)
     }
 
-    override fun onNavigateUp() = navHostFragment.navController.navigateUp()
+    override fun onSupportNavigateUp() = navHostFragment.navController.navigateUp()
 }
