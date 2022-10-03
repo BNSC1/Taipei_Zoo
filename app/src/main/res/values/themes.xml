@@ -24,4 +24,8 @@
         <item name="android:textColor">?attr/colorOnSecondary</item>
     </style>
 
+    <style name="text_info_title">
+        <item name="android:textSize">@dimen/size_item_title_text</item>
+    </style>
+
 </resources>
