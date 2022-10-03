@@ -21,6 +21,7 @@ class TaipeiZooViewModel @Inject constructor(private val repository: TaipeiZooRe
     val errorMsg = _errorMsg.asStateFlow()
 
     private var animals = emptyList<TaipeiZooAnimal>()
+    private val areaMap = HashMap<TaipeiZooArea, List<TaipeiZooAnimal>>()
 
     init {
         getAreas()
@@ -43,13 +44,18 @@ class TaipeiZooViewModel @Inject constructor(private val repository: TaipeiZooRe
         }
     }
 
-    fun getAreaAnimals(area: String) = animals.filter {
-        area.run {
-            if (endsWith("）")) {
-                replace("）", "")
-                    .substringAfter('（')
-            } else this
-        } == it.location
+    fun getAreaAnimals(area: TaipeiZooArea): List<TaipeiZooAnimal>? {
+        if (area !in areaMap) {
+            areaMap[area] = animals.filter {
+                area.name.run {
+                    if (endsWith("）")) {
+                        replace("）", "")
+                            .substringAfter('（')
+                    } else this
+                } == it.location
+            }
+        }
+        return areaMap[area]
     }
 
     private inline fun CoroutineScope.tryRun(action: () -> Unit) {

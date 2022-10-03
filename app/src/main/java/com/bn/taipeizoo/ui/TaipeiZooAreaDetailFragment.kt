@@ -70,16 +70,17 @@ class TaipeiZooAreaDetailFragment : Fragment() {
     }
 
     private fun FragmentTaipeiZooAreaDetailBinding.setupAnimalList() {
-        val areaAnimals = getAreaAnimals(selectedArea.name)
-        if (areaAnimals.isEmpty()) {
-            animalInfoText.visibility = View.GONE
-        }
-        with(animalList) {
-            listAdapter = TaipeiZooAnimalListAdapter {
-                goToAnimalDetail(it)
+        getAreaAnimals(selectedArea)?.let { areaAnimals ->
+            if (areaAnimals.isEmpty()) {
+                animalInfoText.visibility = View.GONE
             }
-            adapter = listAdapter
-            updateListAnimals(areaAnimals)
+            with(animalList) {
+                listAdapter = TaipeiZooAnimalListAdapter {
+                    goToAnimalDetail(it)
+                }
+                adapter = listAdapter
+                updateListAnimals(areaAnimals)
+            }
         }
     }
 
@@ -91,7 +92,7 @@ class TaipeiZooAreaDetailFragment : Fragment() {
         )
     }
 
-    private fun getAreaAnimals(areaName: String) = viewModel.getAreaAnimals(areaName)
+    private fun getAreaAnimals(area: TaipeiZooArea) = viewModel.getAreaAnimals(area)
 
     private fun updateListAnimals(items: List<TaipeiZooAnimal>) {
         listAdapter.updateList(items)

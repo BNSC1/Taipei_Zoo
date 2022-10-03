@@ -60,27 +60,20 @@ class TaipeiZooViewModelTest {
         val result = viewModel.areas.value
 
         coVerify { repository.getTaipeiZooAreas() }
-        assertThat(result).containsExactly(areaA, areaB)
+        assertThat(result).containsExactly(areaA, areaB, areaC)
     }
 
 
     @Test
     fun `normally getting area animals`() {
-        val areaAResult = viewModel.getAreaAnimals(areaA.name)
-        val areaBResult = viewModel.getAreaAnimals(areaB.name)
-        val areaCResult = viewModel.getAreaAnimals(areaC.name)
+        val areaAResult = viewModel.getAreaAnimals(areaA)
+        val areaBResult = viewModel.getAreaAnimals(areaB)
+        val areaCResult = viewModel.getAreaAnimals(areaC)
 
         coVerify { repository.getTaipeiZooAnimals() }
         assertThat(areaAResult).containsExactly(animalA)
         assertThat(areaBResult).containsExactly(animalB, animalC)
         assertThat(areaCResult).containsExactly(animalD)
-    }
-
-    @Test
-    fun `getting area animals with empty area string`() {
-        val result = viewModel.getAreaAnimals("")
-
-        assertThat(result).isEmpty()
     }
 
     @After
