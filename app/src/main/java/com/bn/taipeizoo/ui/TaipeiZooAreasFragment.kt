@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -32,6 +33,8 @@ class TaipeiZooAreasFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        collectErrorMsg()
+
         with(binding) {
             setupAreaList()
         }
@@ -69,4 +72,15 @@ class TaipeiZooAreasFragment : Fragment() {
     private fun updateAdapterList(items: List<TaipeiZooArea>) {
         listAdapter.updateList(items)
     }
+
+    private fun collectErrorMsg() = viewLifecycleOwner.lifecycleScope.launch {
+        viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.CREATED) {
+            viewModel.errorMsg.collect { msg ->
+                msg?.let {
+                    Toast.makeText(requireContext(), it, Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+    }
+
 }
