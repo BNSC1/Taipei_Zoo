@@ -70,12 +70,16 @@ class TaipeiZooAreaDetailFragment : Fragment() {
     }
 
     private fun FragmentTaipeiZooAreaDetailBinding.setupAnimalList() {
+        val areaAnimals = getAreaAnimals(selectedArea.name)
+        if (areaAnimals.isEmpty()) {
+            animalInfoText.visibility = View.GONE
+        }
         with(animalList) {
             listAdapter = TaipeiZooAnimalListAdapter {
                 goToAnimalDetail(it)
             }
             adapter = listAdapter
-            updateListAnimals(getAreaAnimals(selectedArea.name))
+            updateListAnimals(areaAnimals)
         }
     }
 
