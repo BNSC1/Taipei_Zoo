@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="size_list_item_image">96dp</dimen>
-    <dimen name="padding_list_item">8dp</dimen>
-    <dimen name="padding_category_title">8dp</dimen>
-    <dimen name="margin_list_item">8dp</dimen>
-
     <dimen name="size_item_title_text">18sp</dimen>
     <dimen name="size_category_title_text">21sp</dimen>
 
+    <dimen name="padding_list_item">8dp</dimen>
+    <dimen name="padding_category_title">8dp</dimen>
     <dimen name="padding_horizontal_info">16dp</dimen>
     <dimen name="padding_vertical_info">8dp</dimen>
-    <dimen name="margin_top_animal_list">16dp</dimen>
+
+    <dimen name="margin_list_item">8dp</dimen>
+    <dimen name="margin_top_list">16dp</dimen>
 </resources>

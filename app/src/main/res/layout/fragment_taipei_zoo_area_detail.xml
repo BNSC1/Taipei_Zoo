@@ -81,7 +81,7 @@
             style="@style/text_category_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_top_animal_list"
+            android:layout_marginTop="@dimen/margin_top_list"
             android:padding="@dimen/padding_category_title"
             android:text="@string/title_animal_info"
             app:layout_constraintTop_toBottomOf="@+id/area_info_layout" />
