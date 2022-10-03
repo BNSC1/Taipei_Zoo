@@ -35,5 +35,11 @@ class TaipeiZooViewModel @Inject constructor(private val repository: TaipeiZooRe
         }
     }
 
-    fun getAreaAnimals(area: String) = animals.filter { it.location == area }
+    fun getAreaAnimals(area: String) = animals.filter {
+        area.run {
+            if (endsWith("）")) {
+                replace("）","")
+                    .substringAfter('（')
+            } else this
+        } == it.location }
 }

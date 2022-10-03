@@ -26,10 +26,12 @@ class TaipeiZooViewModelTest {
 
     private val areaA = mockk<TaipeiZooArea>()
     private val areaB = mockk<TaipeiZooArea>()
+    private val areaC = mockk<TaipeiZooArea>()
 
     private val animalA = mockk<TaipeiZooAnimal>()
     private val animalB = mockk<TaipeiZooAnimal>()
     private val animalC = mockk<TaipeiZooAnimal>()
+    private val animalD = mockk<TaipeiZooAnimal>()
 
     @Before
     fun setup() {
@@ -37,15 +39,17 @@ class TaipeiZooViewModelTest {
 
         every { areaA.name } returns "areaA"
         every { areaB.name } returns "areaB"
+        every { areaC.name } returns "sectorA（areaC）"
         every { animalA.location } returns areaA.name
         every { animalB.location } returns areaB.name
         every { animalC.location } returns areaB.name
+        every { animalD.location } returns "areaC"
 
         coEvery { repository.getTaipeiZooAnimals() } returns listOf(
-            animalA, animalB, animalC
+            animalA, animalB, animalC, animalD
         )
         coEvery { repository.getTaipeiZooAreas() } returns listOf(
-            areaA, areaB
+            areaA, areaB, areaC
         )
 
         viewModel = TaipeiZooViewModel(repository)
@@ -64,10 +68,12 @@ class TaipeiZooViewModelTest {
     fun `normally getting area animals`() {
         val areaAResult = viewModel.getAreaAnimals(areaA.name)
         val areaBResult = viewModel.getAreaAnimals(areaB.name)
+        val areaCResult = viewModel.getAreaAnimals(areaC.name)
 
         coVerify { repository.getTaipeiZooAnimals() }
         assertThat(areaAResult).containsExactly(animalA)
         assertThat(areaBResult).containsExactly(animalB, animalC)
+        assertThat(areaCResult).containsExactly(animalD)
     }
 
     @Test
